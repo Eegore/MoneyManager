@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Money Manager</title>
+</head>
+<body>
+    <div class="navbar navbar-dark bg-inverse bg-dark shadow-sm">
+        <div class="container d-flex justify-content-between">
+            <a class="navbar-brand" href="#">Money Manager</a>
+        </div>        
+        
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle my-1 mr-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Bank
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                @await Component.InvokeAsync("BankMenu")
+            </div>
+        </div>
+    </div>
+
+    <div class="pos-f-t">
+        <div class="collapse form-inline bg-secondary" id="navbarToggleExternalContent">
+            <form asp-action="ProcessData" method="post" class="form-row col-6">
+                <select class="custom-select my-1 mr-2" name="actionId">
+                    <option value="0">Export to</option>
+                    <option value="1">Import from</option>
+                </select>
+                <input name="filePath" id="filePath" placeholder="Enter file path..." class="w-50 my-1 mr-2 align-middle" />
+                <button type="submit" class="btn btn-primary my-1 mr-2">
+                    Submit
+                </button>
+            </form>
+            <a asp-action="Create" class="btn btn-primary my-1 mr-2">Add Deposit</a>
+        </div>
+        <nav class="navbar navbar-dark bg-dark">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </nav>
+    </div>
+
+    @if (TempData["message"] != null)
+    {
+        <div class="alert alert-success mt-1">@TempData["message"]</div>
+    }
+
+    <div>
+        @RenderBody()
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>

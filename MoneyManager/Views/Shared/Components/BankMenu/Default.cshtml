@@ -1,0 +1,11 @@
+﻿@model IEnumerable<Bank>
+
+@foreach (Bank bank in Model)
+{
+    <a class="dropdown-item"
+       asp-action="List"
+       asp-controller="Deposit"
+       asp-route-bankId="@bank.BankId">
+        @bank.Name
+    </a>
+}

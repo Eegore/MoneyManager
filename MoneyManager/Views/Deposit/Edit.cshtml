@@ -1,0 +1,60 @@
+﻿@model Deposit
+
+@{
+    ViewBag.Title = "Edit Deposit";
+}
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="DepositId" />
+    <div class="form-group">
+        <label asp-for="BankId">Bank</label>
+        <select asp-for="BankId" class="form-control" asp-items="ViewBag.Banks">
+            <option selected disabled>Choose a bank...</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="InitialFund">Initial Fund</label>
+        <div><span asp-validation-for="InitialFund" class="text-danger"></span></div>
+        <input asp-for="InitialFund" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="InterestRate">Interest Rate</label>
+        <div><span asp-validation-for="InterestRate" class="text-danger"></span></div>
+        <input asp-for="InterestRate" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Currency"></label>
+        <div><span asp-validation-for="Currency" class="text-danger"></span></div>
+        <select asp-for="Currency" class="form-control">
+            @foreach (Currency c in Enum.GetValues(typeof(Currency)))
+            {
+                <option>@c</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="OpeningDate">Opening Date</label>
+        <div><span asp-validation-for="OpeningDate" class="text-danger"></span></div>
+        <input asp-for="OpeningDate" type="date" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="ClosingDate">Closing Date</label>
+        <div><span asp-validation-for="ClosingDate" class="text-danger"></span></div>
+        <input asp-for="ClosingDate" type="date" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="CapitalizationTermsPerYear">Capitalization Terms Per Year</label>
+        <div><span asp-validation-for="CapitalizationTermsPerYear" class="text-danger"></span></div>
+        <input asp-for="CapitalizationTermsPerYear" class="form-control" />
+    </div>
+    <div class="checkbox">
+        <label>
+            <input asp-for="HasCapitalization" /> Capitalization
+        </label>
+    </div>
+
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Save</button>
+        <a asp-action="List" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>

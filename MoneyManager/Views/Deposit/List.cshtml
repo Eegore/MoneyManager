@@ -1,0 +1,41 @@
+﻿@model DepositListViewModel
+
+@foreach (var d in Model.Deposits)
+{
+    <div>
+        <div class="d-flex flex-row align-items-center">
+            <h3 class="my-1 mr-2">@d.Bank.Name (@d.InterestRate% | @d.InitialFund (@d.Currency) )</h3>
+            <form asp-action="Delete" method="post">
+                <a asp-action="Edit" class="btn btn-sm btn-warning my-1 mr-2" asp-route-depositId="@d.DepositId">
+                    Edit
+                </a>
+                <input type="hidden" name="depositId" value="@d.DepositId" />
+                <button type="submit" class="btn btn-danger btn-sm my-1 mr-2">
+                    Delete
+                </button>
+            </form>
+        </div>
+        <table class="table table-bordered table-striped">
+            <tbody>
+                <tr>
+                    @foreach (var i in d.Incomes)
+                    {
+                    <td class="text-center">
+                        @i.Key.Month/@i.Key.Year                        
+                    </td>
+
+                    }
+                </tr>
+                <tr>
+                    @foreach (var i in d.Incomes)
+                    {
+                        <td class="text-right">
+                            @i.Value
+                        </td>
+
+                    }
+                </tr>
+            </tbody>
+        </table>
+    </div>
+}
