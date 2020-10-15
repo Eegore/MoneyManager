@@ -18,7 +18,7 @@ namespace MoneyManager.Models
                 context.Deposits.AddRange(
                     new Deposit
                     {
-                        Bank = context.Banks.FirstOrDefault(b => b.Name == "Тинькофф"),
+                        Bank = context.Banks.FirstOrDefault(b => b.Name == "Tinkoff"),
                         InitialFund = 1000m,
                         InterestRate = 2.5m,
                         CapitalizationTermsPerYear = 12,
@@ -29,7 +29,7 @@ namespace MoneyManager.Models
                     },
                     new Deposit
                     {
-                        Bank = context.Banks.FirstOrDefault(b => b.Name == "МКБ"),
+                        Bank = context.Banks.FirstOrDefault(b => b.Name == "MKB"),
                         InitialFund = 500000m,
                         InterestRate = 5.5m,
                         CapitalizationTermsPerYear = 12,
