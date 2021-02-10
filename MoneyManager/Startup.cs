@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using MoneyManager.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 
 namespace MoneyManager
 {
@@ -23,10 +25,10 @@ namespace MoneyManager
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration["Data:MoneyManager:ConnectionString"]));
             services.AddScoped<IDepositRepository, EFDepositRepository>();
             services.AddScoped<IBankRepository, EFBankRepository>();
-            services.AddMvc();
+            services.AddMvc(options => options.EnableEndpointRouting = false);
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
