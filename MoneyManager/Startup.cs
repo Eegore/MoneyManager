@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using MoneyManager.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
 
 namespace MoneyManager
@@ -25,7 +19,8 @@ namespace MoneyManager
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration["Data:MoneyManager:ConnectionString"]));
             services.AddScoped<IDepositRepository, EFDepositRepository>();
             services.AddScoped<IBankRepository, EFBankRepository>();
-            services.AddMvc(options => options.EnableEndpointRouting = false);
+            services.AddScoped<IBrokerRepository, EFBrokerRepository>();
+            services.AddRazorPages();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -36,8 +31,11 @@ namespace MoneyManager
                 app.UseStatusCodePages();
             }
 
-            app.UseMvc(routes => {
-                routes.MapRoute( name: "default", template: "{controller=Deposit}/{action=List}/{id?}");
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute("default", "{controller=Deposit}/{action=List}/{id?}");
             });
 
             SeedData.EnsurePopulated(app);

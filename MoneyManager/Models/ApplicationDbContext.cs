@@ -11,5 +11,7 @@ namespace MoneyManager.Models
         public DbSet<Deposit> Deposits { get; set; }
 
         public DbSet<Bank> Banks { get; set; }
+
+        public DbSet<Broker> Brokers { get; set; }
     }
 }
