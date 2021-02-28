@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -17,8 +18,10 @@ namespace MoneyManager.Models
         [JsonIgnore]
         public Bank Bank { get; set; }
 
+        [Column(TypeName = "decimal(18, 2)")]
         public Decimal InitialFund { get; set; }
 
+        [Column(TypeName = "decimal(18, 2)")]
         public Decimal InterestRate { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
