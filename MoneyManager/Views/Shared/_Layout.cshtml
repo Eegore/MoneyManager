@@ -7,41 +7,17 @@
     <title>Money Manager</title>
 </head>
 <body>
-    <div class="navbar navbar-dark bg-inverse bg-dark shadow-sm">
-        <div class="container d-flex justify-content-between">
-            <a class="navbar-brand" href="#">Money Manager</a>
-        </div>        
-        
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle my-1 mr-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Bank
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                @await Component.InvokeAsync("BankMenu")
-            </div>
-        </div>
-    </div>
-
-    <div class="pos-f-t">
-        <div class="collapse form-inline bg-secondary" id="navbarToggleExternalContent">
-            <form asp-action="ProcessData" method="post" class="form-row col-6">
-                <select class="custom-select my-1 mr-2" name="actionId">
-                    <option value="0">Export to</option>
-                    <option value="1">Import from</option>
-                </select>
-                <input name="filePath" id="filePath" placeholder="Enter file path..." class="w-50 my-1 mr-2 align-middle" />
-                <button type="submit" class="btn btn-primary my-1 mr-2">
-                    Submit
-                </button>
-            </form>
-            <a asp-action="Create" class="btn btn-primary my-1 mr-2">Add Deposit</a>
-        </div>
-        <nav class="navbar navbar-dark bg-dark">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        </nav>
-    </div>
+    <nav class="navbar navbar-dark bg-inverse bg-dark shadow-sm navbar-expand-lg">
+        <a class="navbar-brand">Money Manager</a>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Portfolio" asp-action="AssetList">Portfolio</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Deposit" asp-action="List">Deposits</a>
+            </li>
+        </ul>
+    </nav>
 
     @if (TempData["message"] != null)
     {

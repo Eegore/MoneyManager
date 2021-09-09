@@ -1,5 +1,34 @@
 ﻿@model DepositListViewModel
 
+<div class="pos-f-t">
+    <nav class="collapse form-inline bg-secondary" id="navbarToggleExternalContent">
+        <form asp-action="ProcessData" method="post" class="form-row col-6">
+            <select class="custom-select my-1 mr-2" name="actionId">
+                <option value="0">Export to</option>
+                <option value="1">Import from</option>
+            </select>
+            <input name="filePath" id="filePath" placeholder="Enter file path..." class="w-50 my-1 mr-2 align-middle" />
+            <button type="submit" class="btn btn-primary my-1 mr-2">
+                Submit
+            </button>
+        </form>
+        <a asp-action="Create" class="btn btn-primary my-1 mr-2">Add Deposit</a>
+    </nav>
+    <nav class="navbar navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle my-1 mr-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Bank
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                @await Component.InvokeAsync("BankMenu")
+            </div>
+        </div>
+    </nav>
+</div>
+
 @foreach (var d in Model.Deposits)
 {
     <div>
@@ -20,9 +49,9 @@
                 <tr>
                     @foreach (var i in d.Incomes)
                     {
-                    <td class="text-center">
-                        @i.Key.Month/@i.Key.Year                        
-                    </td>
+                        <td class="text-center">
+                            @i.Key.Month/@i.Key.Year
+                        </td>
 
                     }
                 </tr>

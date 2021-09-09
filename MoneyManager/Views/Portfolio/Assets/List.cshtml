@@ -1,0 +1,28 @@
+﻿@model PortfolioViewModel
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Ticker</th>
+            <th scope="col" class="text-right">Balance</th>
+            <th scope="col">Currency</th>
+            <th scope="col" class="text-right">Quantity</th>
+            <th scope="col" class="text-right">Price</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var a in Model.Assets)
+        {
+        <tr>
+            <td>@a.Name</td>
+            <td>@a.Ticker</td>
+            <td class="text-right">@a.Balance.ToString("#,0.##") (@a.ExpectedYield.ToString("#,0.##"))</td>
+            <td>@a.Currency</td>
+            <td class="text-right">@a.Quantity.ToString("#,0.##")</td>
+            <td class="text-right">@a.AveragePrice.ToString("#,0.##")</td>
+        </tr>
+        }
+    </tbody>
+</table>

@@ -20,7 +20,9 @@ namespace MoneyManager
             services.AddScoped<IDepositRepository, EFDepositRepository>();
             services.AddScoped<IBankRepository, EFBankRepository>();
             services.AddScoped<IBrokerRepository, EFBrokerRepository>();
+            services.AddScoped<IAssetRepository, EFAssetRepository>();
             services.AddRazorPages();
+            services.Configure<Client>(Configuration.GetSection("Data:MoneyManager:Client"));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -32,10 +34,12 @@ namespace MoneyManager
             }
 
             app.UseRouting();
-
+            
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute("default", "{controller=Deposit}/{action=List}/{id?}");
+                //endpoints.MapControllerRoute("default", "{controller=Deposit}/{action=List}/{id?}");
+                endpoints.MapControllerRoute("default", "{controller=Portfolio}/{action=AssetList}");
+                endpoints.MapControllers();
             });
 
             SeedData.EnsurePopulated(app);
