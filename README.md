@@ -1,4 +1,5 @@
 # MoneyManager
 Financial Web App
-
-You can manage deposits and import/export them from/to JSON.
+Feautes:
+— Manage deposits and import/export them from/to JSON
+— View assets via Tinkoff API
